@@ -15,6 +15,10 @@ export default function LessonPanel({
     .filter(Boolean)
     .join(" · ");
 
+    const isSvg = imageBase64?.startsWith("PHN2Zy");
+    const mime = isSvg ? "image/svg+xml" : "image/png";
+
+
   return (
     <details
       open={isOpen}
@@ -39,7 +43,7 @@ export default function LessonPanel({
           <div style={{ marginTop: 16 }}>
             {imageBase64 ? (
               <img
-                src={`data:image/png;base64,${imageBase64}`}
+                src={`data:${mime};base64,${imageBase64}`}
                 alt="Lesson visual aid"
                 style={{ width: "100%", maxWidth: 720, borderRadius: 12, border: "1px solid #ddd" }}
               />

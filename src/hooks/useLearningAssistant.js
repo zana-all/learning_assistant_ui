@@ -9,7 +9,7 @@ import {
 import { normaliseQuiz } from "../utils/normaliseQuiz";
 
 const defaultForm = {
-  year_group: "",
+  year_group: null,
   subject: "",
   topic_idea: "",
   liverun: false,
@@ -45,7 +45,7 @@ export function useLearningAssistant() {
   const [statsError, setStatsError] = useState("");
   const [statsSummary, setStatsSummary] = useState(null);
 
-  const canGenerateLesson = form.year_group.trim() && form.subject.trim();
+  const canGenerateLesson = Number(form.year_group) && form.subject.trim();
   const canGenerateQuiz = lessonText.trim().length > 0;
 
   function updateForm(patch) {
@@ -118,7 +118,7 @@ export function useLearningAssistant() {
 
       const data = await generateQuiz({
         lesson_text: lessonText,
-        year_group: form.year_group.trim(),
+        year_group: Number(form.year_group),
         liverun: form.liverun,
       });
 
@@ -161,7 +161,6 @@ export function useLearningAssistant() {
     async function autoGenerate() {
       if (!visualPrompt) return;
       if (imageBase64) return;
-      if (imageStatus === "loading") return;
 
       setImageStatus("loading");
 
