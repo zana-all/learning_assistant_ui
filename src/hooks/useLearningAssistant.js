@@ -186,7 +186,7 @@ export function useLearningAssistant() {
     return () => {
       cancelled = true;
     };
-  }, [visualPrompt, imageBase64, imageStatus]);
+  }, [visualPrompt]);
 
   return {
     apiBase,
